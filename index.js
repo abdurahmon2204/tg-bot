@@ -40,7 +40,7 @@ bot.on('text', async (ctx) => {
 
         // Google'ning eng so'nggi barqaror va tezkor modeli
         const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash', 
+            model: 'gemini-2.5-flash',
             contents: userMessage,
             config: {
                 systemInstruction: "Siz o'zbek tilida mukammal so'zlashuvchi, muloyim va foydali yordamchisiz. Javoblaringiz qisqa, aniq va tushunarli bo'lsin.",
@@ -57,11 +57,11 @@ bot.on('text', async (ctx) => {
             // 2. SIZGA (ADMIN'GA) XABAR YUBORISH (Agar yozgan odam siz bo'lmasangiz)
             if (ADMIN_ID && userId !== Number(ADMIN_ID)) {
                 const logXabar = `🔔 **Yangi xabar!**\n` +
-                                 `👤 Kimdan: ${userName} (${userUsername})\n` +
-                                 `🆔 ID: \`${userId}\`\n\n` +
-                                 `📝 **Foydalanuvchi:** ${userMessage}\n\n` +
-                                 `🤖 **Gemini javobi:** ${replyText}`;
-                
+                    `👤 Kimdan: ${userName} (${userUsername})\n` +
+                    `🆔 ID: \`${userId}\`\n\n` +
+                    `📝 **Foydalanuvchi:** ${userMessage}\n\n` +
+                    `🤖 **Gemini javobi:** ${replyText}`;
+
                 await bot.telegram.sendMessage(ADMIN_ID, logXabar, { parse_mode: 'Markdown' });
             }
         } else {
@@ -71,7 +71,7 @@ bot.on('text', async (ctx) => {
     } catch (error) {
         console.error("Xatolik yuz berdi:", error);
         await ctx.reply("Tizimda biroz uzilish bo'ldi. Iltimos, bir ozdan so'ng qayta urinib ko'ring.");
-        
+
         // Xatolik haqida adminga hisobot yuborish
         if (ADMIN_ID) {
             const errorMsg = error.message || JSON.stringify(error);
@@ -88,3 +88,14 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'));
 bot.launch()
     .then(() => console.log("🚀 Telegram bot monitoring va yangi Gemini 2.5 modeli bilan ishga tushdi..."))
     .catch((err) => console.error("Botni ishga tushirishda xatolik:", err));
+
+
+
+const http = require('http');
+const PORT = process.env.PORT || 3000;
+http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Bot muvaffaqiyatli ishlamoqda...');
+}).listen(PORT, () => {
+    console.log(`Port binding ta'minlandi: ${PORT}`);
+});
