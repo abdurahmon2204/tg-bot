@@ -17,7 +17,7 @@ const ADMIN_ID = process.env.ADMIN_ID; // Admin ID
 bot.start((ctx) => {
     const ism = ctx.from.first_name || "Foydalanuvchi";
     ctx.reply(
-        `Assalomu alaykum, ${ism}! 👋\n\nMen yangilangan Gemini AI modeli asosida ishlaydigan aqlli botman. ` +
+        `Assalomu alaykum, ${ism}! 👋\n\nMen yangilangan  AI modeli asosida ishlaydigan aqlli botman. ` +
         `Menga istalgan mavzuda (kodlash, fizika, matematika, tillar) savol berishingiz mumkin.`
     );
 });
@@ -40,7 +40,7 @@ bot.on('text', async (ctx) => {
 
         // Google'ning eng so'nggi barqaror va tezkor modeli
         const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-1.5-flash',
             contents: userMessage,
             config: {
                 systemInstruction: "Siz o'zbek tilida mukammal so'zlashuvchi, muloyim va foydali yordamchisiz. Javoblaringiz qisqa, aniq va tushunarli bo'lsin.",
